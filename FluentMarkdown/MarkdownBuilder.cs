@@ -1,5 +1,4 @@
 ﻿using FluentMarkdown.Builders;
-using FluentMarkdown.Internals;
 using FluentMarkdown.Tables;
 
 namespace FluentMarkdown;
@@ -7,37 +6,9 @@ namespace FluentMarkdown;
 /// <summary>
 /// A class for building Markdown content in a fluent manner.
 /// </summary>
-public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
+public class MarkdownBuilder : ParagraphMarkdownBuilder<MarkdownBuilder>
 {
-    private bool isBuildingLine;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MarkdownBuilder"/> class.
-    /// </summary>
-    public MarkdownBuilder()
-    {
-        Prefixes = new();
-    }
-
     internal int ListLevel { get; set; }
-
-    internal LinePrefixStack Prefixes { get; set; }
-
-    /// <inheritdoc/>
-    public override MarkdownBuilder Add(string? text)
-    {
-        if (string.IsNullOrEmpty(text))
-        {
-            return this;
-        }
-
-        if (!text!.EndsWith(Environment.NewLine))
-        {
-            isBuildingLine = true;
-        }
-
-        return base.Add(text);
-    }
 
     /// <summary>
     /// Adds a block quotation to the content.
@@ -216,46 +187,6 @@ public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
     public MarkdownBuilder AddHorizontalRule() => AddParagraph("---");
 
     /// <summary>
-    /// Appends the specified text to the content followed by the default line terminator.
-    /// </summary>
-    /// <param name="text">
-    /// The text to append to the content.
-    /// </param>
-    /// <returns>
-    /// The current instance of the <see cref="MarkdownBuilder"/> class.
-    /// </returns>
-    public MarkdownBuilder AddLine(string? text) => AddLine(b => b.Add(text));
-
-    /// <summary>
-    /// Appends the specified text to the content followed by the default line terminator. If not at the beginning of a line,
-    /// a line terminator is added before the text.
-    /// </summary>
-    /// <param name="addContent">
-    /// The action to apply to builder for the content that will be added to the line.
-    /// </param>
-    /// <returns>
-    /// The current instance of the <see cref="MarkdownBuilder"/> class.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown when the specified action is <see langword="null"/>.
-    /// </exception>
-    public MarkdownBuilder AddLine(Action<InlineStyledMarkdownBuilder> addContent)
-    {
-        if (addContent is null)
-        {
-            throw new ArgumentNullException(nameof(addContent));
-        }
-
-        StartNewLine();
-        var lineBuilder = new InlineStyledMarkdownBuilder();
-        addContent(lineBuilder);
-        var content = lineBuilder.ToString();
-        Add(content);
-
-        return CompleteLine();
-    }
-
-    /// <summary>
     /// Adds an ordered list to the content.
     /// </summary>
     /// <param name="items">
@@ -410,7 +341,7 @@ public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
     /// <returns>
     /// The current instance of the <see cref="MarkdownBuilder"/> class.
     /// </returns>
-    public MarkdownBuilder AddParagraph(Action<InlineStyledMarkdownBuilder> addContent)
+    public MarkdownBuilder AddParagraph(Action<ParagraphMarkdownBuilder> addContent)
     {
         if (addContent is null)
         {
@@ -419,7 +350,7 @@ public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
 
         StartParagraph();
 
-        var paragraphBuilder = new InlineStyledMarkdownBuilder();
+        var paragraphBuilder = new ParagraphMarkdownBuilder();
         addContent(paragraphBuilder);
         Add(paragraphBuilder.ToString());
         CompleteParagraph();
@@ -463,7 +394,7 @@ public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
             throw new ArgumentNullException(nameof(addContent));
         }
 
-        if (isBuildingLine)
+        if (IsBuildingLine)
         {
             CompleteLine();
         }
@@ -599,23 +530,11 @@ public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
     }
 
     /// <summary>
-    /// Appends the default line terminator to the content.
-    /// </summary>
-    /// <returns>
-    /// The current instance of the <see cref="MarkdownBuilder"/> class.
-    /// </returns>
-    public MarkdownBuilder CompleteLine()
-    {
-        isBuildingLine = false;
-        return base.Add(Environment.NewLine);
-    }
-
-    /// <summary>
     /// Starts a new paragraph if one is not already in progress.
     /// </summary>
     protected void StartParagraph()
     {
-        if (isBuildingLine)
+        if (IsBuildingLine)
         {
             CompleteLine();
         }
@@ -639,19 +558,9 @@ public class MarkdownBuilder : InlineStyledMarkdownBuilder<MarkdownBuilder>
 
     private void CompleteParagraph()
     {
-        if (isBuildingLine)
+        if (IsBuildingLine)
         {
             CompleteLine();
         }
-    }
-
-    private void StartNewLine()
-    {
-        if (isBuildingLine)
-        {
-            CompleteLine();
-        }
-
-        Add(Prefixes.ToString());
     }
 }

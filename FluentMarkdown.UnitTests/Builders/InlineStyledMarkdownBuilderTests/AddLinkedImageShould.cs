@@ -25,6 +25,6 @@ public class AddLinkedImageShould
         var destinationAddress = "https://example.com";
         var title = "Example";
         builder.AddLinkedImage(destinationAddress, imageAddress, altText, title);
-        Assert.AreEqual($"[![{altText}](https://example.com/my%20path.jpg \"{title}\")](https://example.com)", builder.ToString());
+        Assert.AreEqual($"[![{altText}](https://example.com/my%20path.jpg)](https://example.com \"{title}\")", builder.ToString());
     }
 }

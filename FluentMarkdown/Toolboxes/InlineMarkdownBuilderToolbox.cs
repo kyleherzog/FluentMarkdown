@@ -31,46 +31,28 @@ public class InlineMarkdownBuilderToolbox<T> : IImageAddable<T>, ILinkable<T>
     /// <inheritdoc/>
     public T AddLink(string url)
     {
-        return Builder.Add($"<{url}>");
+        return Builder.Add(url.AsLink());
     }
 
     /// <inheritdoc/>
     public T AddLink(string url, string text, string? title = null)
     {
-        var encodedUrl = url.EncodeUrl();
-        Builder.Add($"[{text}]({encodedUrl}");
-        if (!string.IsNullOrWhiteSpace(title))
-        {
-            Builder.Add($" \"{title}\"");
-        }
-
-        return Builder.Add(")");
+        return Builder.Add(text.WithLinkTo(url).WithTitle(title));
     }
 
     /// <inheritdoc/>
     public T AddLinkedImage(string destinationAddress, string imageAddress, string altText, string? title = null)
     {
-        var encodedDestinationAddress = destinationAddress.EncodeUrl();
-        var encodedImageAddress = imageAddress.EncodeUrl();
-        Builder.Add($"[![{altText}]({encodedImageAddress}");
-        if (!string.IsNullOrWhiteSpace(title))
-        {
-            Builder.Add($" \"{title}\"");
-        }
-
-        return Builder.Add($")]({encodedDestinationAddress})");
+        var image = imageAddress.AsImage().WithAltText(altText);
+        var link = image.ToString().WithLinkTo(destinationAddress).WithTitle(title);
+        return Builder.Add(link);
     }
 
     /// <inheritdoc/>
-    public T AddImage(string url, string altText, string? title = null)
+    public T AddImage(string url, string? altText, string? title = null)
     {
         var encodedUrl = url.EncodeUrl();
-        Builder.Add($"![{altText}]({encodedUrl}");
-        if (!string.IsNullOrWhiteSpace(title))
-        {
-            Builder.Add($" \"{title}\"");
-        }
-
-        return Builder.Add(")");
+        var image = encodedUrl.AsImage().WithAltText(altText).WithTitle(title);
+        return Builder.Add(image);
     }
 }
