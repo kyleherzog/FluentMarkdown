@@ -1,2 +1,2 @@
 ﻿# FluentMarkdown
-Provides support for writing markdown documents in a fluent manner. |
+Provides support for writing markdown documents in a fluent manner.

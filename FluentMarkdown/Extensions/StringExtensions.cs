@@ -49,4 +49,18 @@ public static class StringExtensions
     {
         return new MarkdownLink(destination, text);
     }
+
+    /// <summary>
+    /// Formats as string value as inline code.
+    /// </summary>
+    /// <param name="code">
+    /// The text to format as code.
+    /// </param>
+    /// <returns>
+    /// The text in inline code format.
+    /// </returns>
+    public static string AsCode(this string code)
+    {
+        return $"`{code}`";
+    }
 }
