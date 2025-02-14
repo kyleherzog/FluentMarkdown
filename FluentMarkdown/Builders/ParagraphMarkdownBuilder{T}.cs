@@ -92,7 +92,6 @@ public class ParagraphMarkdownBuilder<T> : InlineStyledMarkdownBuilder<T>
         return base.Add(Environment.NewLine);
     }
 
-
     internal void StartNewLine()
     {
         if (IsBuildingLine)
