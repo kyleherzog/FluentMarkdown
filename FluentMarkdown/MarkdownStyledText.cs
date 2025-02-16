@@ -88,7 +88,7 @@ public class MarkdownStyledText
 
         var result = builder.ToString();
         var suffix = new string(result.Reverse().ToArray());
-        builder.Append(EscapeFormattingCharacters(Text, new HashSet<char>(builder.ToString())));
+        builder.Append(Text.Escaping(new HashSet<char>(builder.ToString()).ToArray()));
         builder.Append(suffix);
         return needsSubscriptTags
             ? $"<sub>{builder}</sub>"
@@ -193,15 +193,5 @@ public class MarkdownStyledText
         }
 
         return this;
-    }
-
-    private static string EscapeFormattingCharacters(string text, IEnumerable<char> charactersToEscape)
-    {
-        foreach (var character in charactersToEscape)
-        {
-            text = text.Replace(character.ToString(), $"\\{character}");
-        }
-
-        return text;
     }
 }

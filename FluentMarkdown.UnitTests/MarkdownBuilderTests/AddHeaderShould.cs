@@ -44,6 +44,16 @@ public class AddHeaderShould
         Assert.AreEqual($"{text}{Environment.NewLine}{Environment.NewLine}# {text}{Environment.NewLine}", builder.ToString());
     }
 
+    [TestMethod]
+    public void AddHeaderIdGivenId()
+    {
+        var builder = new MarkdownBuilder();
+        var text = "Hello, World!";
+        var id = "test";
+        builder.AddHeader(1, text, id);
+        Assert.AreEqual($"# {text} {{#{id}}}{Environment.NewLine}", builder.ToString());
+    }
+
     [DataTestMethod]
     [DataRow(0)]
     [DataRow(7)]

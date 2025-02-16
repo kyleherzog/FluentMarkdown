@@ -48,6 +48,28 @@ public static class StringExtensions
     }
 
     /// <summary>
+    /// Escapes the specified characters in the text.
+    /// </summary>
+    /// <param name="text">
+    /// The text content in which to find characters to escape.
+    /// </param>
+    /// <param name="charactersToEscape">
+    /// The characters to escape.
+    /// </param>
+    /// <returns>
+    /// The text with the specified characters escaped.
+    /// </returns>
+    public static string Escaping(this string text, params char[] charactersToEscape)
+    {
+        foreach (var character in charactersToEscape)
+        {
+            text = text.Replace(character.ToString(), $"\\{character}");
+        }
+
+        return text;
+    }
+
+    /// <summary>
     /// Applies the desired bold styling to the text.
     /// </summary>
     /// <param name="text">

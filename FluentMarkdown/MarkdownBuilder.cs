@@ -131,6 +131,9 @@ public class MarkdownBuilder : ParagraphMarkdownBuilder<MarkdownBuilder>
     /// <param name="addContent">
     /// The action to apply to the content that will be inside the header.
     /// </param>
+    /// <param name="id">
+    /// The custom id to assign to the header.
+    /// </param>
     /// <returns>
     /// The current instance of the <see cref="MarkdownBuilder"/> class.
     /// </returns>
@@ -140,7 +143,7 @@ public class MarkdownBuilder : ParagraphMarkdownBuilder<MarkdownBuilder>
     /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown when the specified level is not between 1 and 6.
     /// </exception>
-    public MarkdownBuilder AddHeader(int level, Action<InlineStyledMarkdownBuilder> addContent)
+    public MarkdownBuilder AddHeader(int level, Action<InlineStyledMarkdownBuilder> addContent, string? id = null)
     {
         if (addContent is null)
         {
@@ -158,6 +161,11 @@ public class MarkdownBuilder : ParagraphMarkdownBuilder<MarkdownBuilder>
             Add(" ");
             var headerBuilder = new InlineStyledMarkdownBuilder();
             addContent(headerBuilder);
+            if (!string.IsNullOrEmpty(id))
+            {
+                headerBuilder.Add($" {{#{id}}}");
+            }
+
             b.Add(headerBuilder.ToString());
         });
 
@@ -173,10 +181,13 @@ public class MarkdownBuilder : ParagraphMarkdownBuilder<MarkdownBuilder>
     /// <param name="text">
     /// The text to add to the header.
     /// </param>
+    /// <param name="id">
+    /// The custom id to assign to the header.
+    /// </param>
     /// <returns>
     /// The current instance of the <see cref="MarkdownBuilder"/> class.
     /// </returns>
-    public MarkdownBuilder AddHeader(int level, string text) => string.IsNullOrEmpty(text) ? this : AddHeader(level, x => x.Add(text));
+    public MarkdownBuilder AddHeader(int level, string text, string? id = null) => string.IsNullOrEmpty(text) ? this : AddHeader(level, x => x.Add(text), id);
 
     /// <summary>
     /// Adds a horizontal rule to the content.
