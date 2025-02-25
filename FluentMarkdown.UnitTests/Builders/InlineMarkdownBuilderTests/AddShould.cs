@@ -42,7 +42,7 @@ public class AddShould
     public void ThrowExceptionGivenNullBuilder()
     {
         var builder = new InlineMarkdownBuilder();
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             builder.Add((InlineMarkdownBuilder)null!);
         });

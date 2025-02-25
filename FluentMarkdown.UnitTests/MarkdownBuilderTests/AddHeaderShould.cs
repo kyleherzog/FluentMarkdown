@@ -64,7 +64,7 @@ public class AddHeaderShould
     {
         var builder = new MarkdownBuilder();
         var text = "Hello, World!";
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
         {
             builder.AddHeader(level, text);
         });
@@ -75,7 +75,7 @@ public class AddHeaderShould
     {
         var builder = new MarkdownBuilder();
         Action<InlineStyledMarkdownBuilder> action = null!;
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             builder.AddHeader(1, action);
         });

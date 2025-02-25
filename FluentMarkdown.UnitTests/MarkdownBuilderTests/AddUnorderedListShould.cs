@@ -1,4 +1,6 @@
-﻿namespace FluentMarkdown.UnitTests.MarkdownBuilderTests;
+﻿using FluentMarkdown.Builders;
+
+namespace FluentMarkdown.UnitTests.MarkdownBuilderTests;
 
 [TestClass]
 public class AddUnorderedListShould : VerifyBase
@@ -102,8 +104,8 @@ public class AddUnorderedListShould : VerifyBase
     public void ThrowsExceptionGivenNullAction()
     {
         var builder = new MarkdownBuilder();
-        Action<MarkdownBuilder> action = null!;
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Action<MarkdownBuilder<MarkdownBuilder>> action = null!;
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             builder.AddUnorderedList(action);
         });

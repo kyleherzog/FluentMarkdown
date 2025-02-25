@@ -56,6 +56,6 @@ public class AddLineShould
     {
         var builder = new ParagraphMarkdownBuilder();
         Action<InlineStyledMarkdownBuilder> action = null!;
-        Assert.ThrowsException<ArgumentNullException>(() => builder.AddLine(action));
+        Assert.ThrowsExactly<ArgumentNullException>(() => builder.AddLine(action));
     }
 }

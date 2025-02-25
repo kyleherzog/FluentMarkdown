@@ -1,4 +1,5 @@
 ﻿using FluentMarkdown.Builders;
+using FluentMarkdown.CodeBlocks;
 
 namespace FluentMarkdown.UnitTests.Builders.InlineStyledMarkdownBuilderTests;
 
@@ -50,7 +51,7 @@ public class AddCodeShould
     {
         var builder = new InlineStyledMarkdownBuilder();
         Action<CodeMarkdownBuilder> action = null!;
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             builder.AddCode(action);
         });

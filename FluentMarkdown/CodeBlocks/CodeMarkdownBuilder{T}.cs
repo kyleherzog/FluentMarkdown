@@ -1,4 +1,4 @@
-﻿namespace FluentMarkdown.Builders;
+﻿namespace FluentMarkdown.CodeBlocks;
 
 /// <summary>
 /// A markdown builder designed to be used within an inline code block.

@@ -1,4 +1,5 @@
-﻿using FluentMarkdown.Interfaces;
+﻿using FluentMarkdown.CodeBlocks;
+using FluentMarkdown.Interfaces;
 
 namespace FluentMarkdown.Builders;
 
@@ -23,7 +24,7 @@ public class InlineStyledMarkdownBuilder<T> : InlineMarkdownBuilder<T>, IImageAd
     public T AddCode(string text) => string.IsNullOrEmpty(text) ? (T)this : AddCode(x => x.Add(text.Replace("`", "``")));
 
     /// <summary>
-    /// Adds an inline code block to the content using the specified action.
+    /// Adds an inline code block to the content.
     /// </summary>
     /// <param name="addContent">
     /// The action to apply to the content that will be inside the inline code block.
@@ -69,7 +70,7 @@ public class InlineStyledMarkdownBuilder<T> : InlineMarkdownBuilder<T>, IImageAd
     public T AddTextBold(string text) => string.IsNullOrEmpty(text) ? (T)this : AddTextBold(x => x.Add(text));
 
     /// <summary>
-    /// Adds bold text to the content using the specified action.
+    /// Adds bold text to the content.
     /// </summary>
     /// <param name="addContent">
     /// The action to apply to the content that will be bold.
@@ -102,7 +103,7 @@ public class InlineStyledMarkdownBuilder<T> : InlineMarkdownBuilder<T>, IImageAd
     public T AddTextBoldItalic(string text) => string.IsNullOrEmpty(text) ? (T)this : AddTextBoldItalic(x => x.Add(text));
 
     /// <summary>
-    /// Adds bold and italic text to the content using the specified action.
+    /// Adds bold and italic text to the content.
     /// </summary>
     /// <param name="addContent">
     /// The action to apply to the content that will be bold and italic.
@@ -121,7 +122,7 @@ public class InlineStyledMarkdownBuilder<T> : InlineMarkdownBuilder<T>, IImageAd
     }
 
     /// <summary>
-    /// Adds the specified text to the content in italic styling.
+    /// Adds text to the content in italic styling.
     /// </summary>
     /// <param name="text">
     /// The text to add to the content with italic styling.
@@ -132,7 +133,7 @@ public class InlineStyledMarkdownBuilder<T> : InlineMarkdownBuilder<T>, IImageAd
     public T AddTextItalic(string text) => string.IsNullOrEmpty(text) ? (T)this : AddTextItalic(x => x.Add(text));
 
     /// <summary>
-    /// Applies italic styling to the content added by the specified action.
+    /// Adds text to the content in italic styling.
     /// </summary>
     /// <param name="addContent">
     /// The action to apply to the content that will be italic.

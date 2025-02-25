@@ -1,4 +1,6 @@
-﻿namespace FluentMarkdown.UnitTests.MarkdownBuilderTests;
+﻿using FluentMarkdown.Builders;
+
+namespace FluentMarkdown.UnitTests.MarkdownBuilderTests;
 
 [TestClass]
 public class AddBlockQuoteShould
@@ -35,7 +37,7 @@ public class AddBlockQuoteShould
     public void ThrowArgumentNullExceptionGivenNullAction()
     {
         var builder = new MarkdownBuilder();
-        Action<MarkdownBuilder> action = null!;
-        Assert.ThrowsException<ArgumentNullException>(() => builder.AddBlockQuote(action));
+        Action<MarkdownBuilder<MarkdownBuilder>> action = null!;
+        Assert.ThrowsExactly<ArgumentNullException>(() => builder.AddBlockQuote(action));
     }
 }

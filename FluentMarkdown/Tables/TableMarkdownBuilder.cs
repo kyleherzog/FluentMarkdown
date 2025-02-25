@@ -6,26 +6,16 @@ namespace FluentMarkdown.Tables;
 /// <summary>
 /// A markdown builder for creating tables.
 /// </summary>
-public class TableMarkdownBuilder
+public class TableMarkdownBuilder : NestableElementBuilder
 {
     private bool hasHeader;
 
     internal TableMarkdownBuilder(LinePrefixStack prefixes)
+        : base(prefixes)
     {
-        Prefixes = prefixes;
     }
-
-    internal InlineMarkdownBuilder Builder { get; } = new();
 
     internal IList<TableCellAlignment?> Cells { get; } = new List<TableCellAlignment?>();
-
-    internal LinePrefixStack Prefixes { get; set; }
-
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        return Builder.ToString();
-    }
 
     /// <summary>
     /// Configures the table body.

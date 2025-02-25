@@ -50,7 +50,7 @@ public class AddTextItalicShould
     {
         var builder = new InlineStyledMarkdownBuilder();
         Action<EmphasisMarkdownBuilder> action = null!;
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             builder.AddTextItalic(action);
         });

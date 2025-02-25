@@ -27,7 +27,7 @@ public class MarkdownImageShould
     [TestMethod]
     public void ThrowArgumentExceptionGivenEmptyAddress()
     {
-        Assert.ThrowsException<ArgumentException>(() =>
+        Assert.ThrowsExactly<ArgumentException>(() =>
         {
             string.Empty.AsImage();
         });
@@ -37,7 +37,7 @@ public class MarkdownImageShould
     public void ThrowArgumentNullExceptionGivenNullAddress()
     {
         string value = null!;
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             value.AsImage();
         });

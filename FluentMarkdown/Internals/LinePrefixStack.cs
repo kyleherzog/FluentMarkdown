@@ -2,22 +2,7 @@
 
 internal class LinePrefixStack
 {
-    private static int indentSize = 4;
     private readonly Stack<string> stack = new();
-
-    public static int IndentSize
-    {
-        get => indentSize;
-        set
-        {
-            if (value < 1)
-            {
-                throw new ArgumentOutOfRangeException(nameof(value), "Indent size must be greater than 0");
-            }
-
-            indentSize = value;
-        }
-    }
 
     public void Pop()
     {
@@ -31,7 +16,7 @@ internal class LinePrefixStack
 
     public void PushIndent()
     {
-        stack.Push(new string(' ', indentSize));
+        stack.Push(new string(' ', MarkdownConfiguration.Global.IndentSize));
     }
 
     public override string ToString()

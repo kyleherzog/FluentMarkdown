@@ -27,7 +27,7 @@ public class ConversionToStringShould
     [TestMethod]
     public void ThrowArgumentExceptionGivenEmptyDestination()
     {
-        Assert.ThrowsException<ArgumentException>(() =>
+        Assert.ThrowsExactly<ArgumentException>(() =>
         {
             string.Empty.AsLink();
         });
@@ -37,7 +37,7 @@ public class ConversionToStringShould
     public void ThrowArgumentNullExceptionGivenNullDestination()
     {
         string value = null!;
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             value.AsLink();
         });
