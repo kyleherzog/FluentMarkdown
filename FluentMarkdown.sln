@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMarkdown", "FluentMarkdown\FluentMarkdown.csproj", "{6488E765-0E04-4299-962F-1CB25285CF9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F57EFC10-1A9A-4340-A7CC-F2D3EAAB9DE3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentMarkdown.UnitTests", "FluentMarkdown.UnitTests\FluentMarkdown.UnitTests.csproj", "{74995177-A8FD-4839-9AC1-43BC1587CFD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6488E765-0E04-4299-962F-1CB25285CF9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6488E765-0E04-4299-962F-1CB25285CF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6488E765-0E04-4299-962F-1CB25285CF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6488E765-0E04-4299-962F-1CB25285CF9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74995177-A8FD-4839-9AC1-43BC1587CFD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74995177-A8FD-4839-9AC1-43BC1587CFD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74995177-A8FD-4839-9AC1-43BC1587CFD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74995177-A8FD-4839-9AC1-43BC1587CFD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
